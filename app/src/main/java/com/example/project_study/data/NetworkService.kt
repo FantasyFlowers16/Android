@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 
 object NetworkService {
     private val myClient: OkHttpClient = OkHttpClient.Builder()
-        .connectTimeout(20, TimeUnit.SECONDS)
+        .connectTimeout(40, TimeUnit.SECONDS)
         .build()
 
     private fun provideGson(): Gson = GsonBuilder()

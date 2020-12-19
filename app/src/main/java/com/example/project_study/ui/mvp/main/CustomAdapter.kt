@@ -21,18 +21,17 @@ class CustomAdapter(private val list: List<Recipe>, private val onClick: (Int) -
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.text.text = "test"
-        holder.text2.text = "test"
-        holder.itemLayout.setOnClickListener {
+        holder.text.text = list[position].description
+//        holder.itemLayout.setOnClickListener {
             //TODO поменять на иденификатор uuid
-            onClick.invoke(position)
-        }
+//            onClick.invoke(position)
+//        }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val text = view.findViewById<TextView>(R.id.textView)
-        val text2 = view.findViewById<TextView>(R.id.textView2)
-        val itemLayout = view.findViewById<ConstraintLayout>(R.id.itemLayout)
+        val text = view.findViewById<TextView>(R.id.recipe_text)
+//        val text2 = view.findViewById<TextView>(R.id.textView2)
+//        val itemLayout = view.findViewById<ConstraintLayout>(R.id.itemLayout)
 
     }
 }

@@ -6,10 +6,10 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface Api {
-    @GET("recipes")
+    @GET("/recipes")
     fun fetchRecipes(): Call<List<Recipe>>
 
-    @GET("recipes/{uuid}")
+    @GET("/recipes/{uuid}")
     fun fetchRecipe(@Path("uuid") id: String): Call<Recipe>
 
 }

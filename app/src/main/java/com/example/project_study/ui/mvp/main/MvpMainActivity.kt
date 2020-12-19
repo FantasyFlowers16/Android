@@ -3,6 +3,7 @@ package com.example.project_study.ui.mvp.main
 import CustomAdapter
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -12,21 +13,35 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.project_study.R
 import com.example.project_study.data.objects.Recipe
 import com.example.project_study.ui.mvp.details.MvpDetailsActivity
+import com.google.android.material.snackbar.Snackbar
 
 class MvpMainActivity : AppCompatActivity(), IMainView{
     lateinit var presenter: MvpMainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initPresenter()
+        setContentView(R.layout.activity_main)
         initViews()
+        initPresenter()
+        presenter.init()
+
     }
         private fun initViews(){
-            findViewById<ProgressBar>(R.id.mvpProgressBar).visibility = View.VISIBLE
+//            findViewById<ProgressBar>(R.id.mvpProgressBar).visibility = View.VISIBLE
         }
         private fun initPresenter(){
             presenter = MvpMainPresenter(this)
         }
+
+
+    override fun showInfo(item: String) {
+        Snackbar.make(
+                findViewById(R.id.main_root),
+                item,
+                Snackbar.LENGTH_LONG)
+        Log.i("TAg", item)
+        Toast.makeText(this,item,Toast.LENGTH_LONG).show()
+    }
 
     override fun showList(list: List<Recipe>) {
         val recyclerView = findViewById<RecyclerView>(R.id.mvpMainRecycler)
@@ -41,9 +56,13 @@ class MvpMainActivity : AppCompatActivity(), IMainView{
 
     override fun showLoader(flag: Boolean) {
         if (flag) {
+            Toast.makeText(this, "load", Toast.LENGTH_LONG).show()
+            Log.i("TAg", "load")
             findViewById<ProgressBar>(R.id.mvpProgressBar).visibility = View.VISIBLE
             findViewById<RecyclerView>(R.id.mvpMainRecycler).visibility = View.GONE
         } else {
+            Toast.makeText(this, "noload", Toast.LENGTH_LONG).show()
+            Log.i("TAg", "noload")
             findViewById<ProgressBar>(R.id.mvpProgressBar).visibility = View.GONE
             findViewById<RecyclerView>(R.id.mvpMainRecycler).visibility = View.VISIBLE
         }
