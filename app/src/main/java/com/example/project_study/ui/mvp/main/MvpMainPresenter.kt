@@ -8,6 +8,7 @@ class MvpMainPresenter(private var view: IMainView?) : IMainPresenter{
     override fun init() {
         fetchData()
         view?.showInfo("Проверка")
+
     }
 
     private fun fetchData(){
@@ -15,14 +16,14 @@ class MvpMainPresenter(private var view: IMainView?) : IMainPresenter{
         App.repository.fetchRecipeList(
                 onError = {view?.showError(it)},
                 onResult = {
-                    view?.showList(it)
+                    view?.showList(it.recipes)
                     view?.showLoader(false)
                 }
         )
 
     }
     override fun destroy() {
-       view = null
+
     }
 
     override fun refresh() {

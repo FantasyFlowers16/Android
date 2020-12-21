@@ -13,6 +13,7 @@ object NetworkService {
         .connectTimeout(40, TimeUnit.SECONDS)
         .build()
 
+
     private fun provideGson(): Gson = GsonBuilder()
         .setLenient()
         .create()
@@ -22,6 +23,7 @@ object NetworkService {
         .baseUrl(Constants.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create(provideGson()))
         .build()
+
 
     fun networkService(): Api = retrofit().create(Api::class.java)
 }

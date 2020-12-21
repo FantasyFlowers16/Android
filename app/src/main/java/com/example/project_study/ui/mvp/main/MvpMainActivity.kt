@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project_study.R
 import com.example.project_study.data.objects.Recipe
-import com.example.project_study.ui.mvp.details.MvpDetailsActivity
 import com.google.android.material.snackbar.Snackbar
 
 class MvpMainActivity : AppCompatActivity(), IMainView{
@@ -26,8 +25,9 @@ class MvpMainActivity : AppCompatActivity(), IMainView{
         presenter.init()
 
     }
+
         private fun initViews(){
-//            findViewById<ProgressBar>(R.id.mvpProgressBar).visibility = View.VISIBLE
+            findViewById<ProgressBar>(R.id.mvpProgressBar).visibility = View.VISIBLE
         }
         private fun initPresenter(){
             presenter = MvpMainPresenter(this)
@@ -48,20 +48,21 @@ class MvpMainActivity : AppCompatActivity(), IMainView{
         recyclerView.layoutManager = LinearLayoutManager(this)
         //TODO Adapter
         recyclerView.adapter = CustomAdapter(list, onClick = {
-            val intent = Intent(this, MvpDetailsActivity::class.java)
+            val intent = Intent(this, MvpMainActivity::class.java)
             intent.putExtra("id", it)
             startActivity(intent)
         })
     }
 
+
     override fun showLoader(flag: Boolean) {
         if (flag) {
-            Toast.makeText(this, "load", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "hello", Toast.LENGTH_LONG).show()
             Log.i("TAg", "load")
             findViewById<ProgressBar>(R.id.mvpProgressBar).visibility = View.VISIBLE
             findViewById<RecyclerView>(R.id.mvpMainRecycler).visibility = View.GONE
         } else {
-            Toast.makeText(this, "noload", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "hello2", Toast.LENGTH_LONG).show()
             Log.i("TAg", "noload")
             findViewById<ProgressBar>(R.id.mvpProgressBar).visibility = View.GONE
             findViewById<RecyclerView>(R.id.mvpMainRecycler).visibility = View.VISIBLE

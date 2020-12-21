@@ -1,7 +1,11 @@
 package com.example.project_study.data.objects
 
 import com.google.gson.annotations.SerializedName
+data class Recipes (
+    @SerializedName("recipes")
+    val recipes: List<Recipe>
 
+)
 data class Recipe(
 
     @SerializedName("uuid")
