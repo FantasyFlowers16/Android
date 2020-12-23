@@ -6,12 +6,13 @@ interface IDetailsView {
     fun showItem(item: Recipe)
     fun showLoad(flag: Boolean)
     fun showEr(message: String)
-    fun getId(id: String)
+    fun getId(list: List<Recipe>)
+
 
 }
 
 interface IDetailsPresenter {
-    fun init()
+    fun init(id: String)
     fun destroy()
     fun refresh()
 }

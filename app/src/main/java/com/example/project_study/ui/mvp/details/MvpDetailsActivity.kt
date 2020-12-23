@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project_study.R
 import com.example.project_study.data.objects.Recipe
-import com.example.project_study.ui.mvp.main.MvpMainActivity
 
 
 class MvpDetailsActivity : AppCompatActivity(), IDetailsView {
@@ -21,9 +20,11 @@ class MvpDetailsActivity : AppCompatActivity(), IDetailsView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
+        uuid = getIntent().getSerializableExtra("id").toString()
         initViews()
         initPresenter()
-        presenter.init()
+        presenter.init(uuid)
+
 
     }
 
@@ -34,6 +35,7 @@ class MvpDetailsActivity : AppCompatActivity(), IDetailsView {
     private fun initPresenter() {
         presenter = MvpDetailsPresenter(this)
     }
+
 
     override fun showItem(item: Recipe) {
         val uuid = findViewById<RecyclerView>(R.id.mvpMainRecycler)
@@ -61,14 +63,17 @@ class MvpDetailsActivity : AppCompatActivity(), IDetailsView {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
-    override fun getId(id: String) {
-        val uuid = findViewById<RecyclerView>(R.id.mvpMainRecycler)
-        uuid.layoutManager = LinearLayoutManager(this)
+    override fun getId(list: List<Recipe>) {
+        val recyclerView = findViewById<RecyclerView>(R.id.mvpMainRecycler)
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
-//        uuid.adapter = CustomAdapter(Recipe, onClick = {
-//            val intent = Intent(this, MvpMainActivity::class.java)
-//            intent.putExtra("id", it)
-//            startActivity(intent)
-//        })
+        recyclerView.adapter = CustomDetailsAdapter(list) {
+            val intent = Intent(this, MvpDetailsActivity::class.java).apply {
+                putExtra("id", list.elementAt(it).uuid)
+                val uuid =list.elementAt(it).uuid
+
+            }
+            startActivity(intent)
+        }
     }
 }

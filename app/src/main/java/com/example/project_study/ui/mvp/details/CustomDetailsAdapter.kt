@@ -1,3 +1,5 @@
+package com.example.project_study.ui.mvp.details
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,17 +12,16 @@ import com.example.project_study.data.objects.Recipe
 import com.squareup.picasso.Picasso
 
 
-class CustomAdapter(private val list: List<Recipe>, private val onClick: (Int) -> Unit) :
-        RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+class CustomDetailsAdapter(private val list: List<Recipe>, private val onClick: (Int) -> Unit) :
+        RecyclerView.Adapter<CustomDetailsAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomDetailsAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
                 R.layout.item_list, parent, false
         )
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.text.text = list[position].name
@@ -36,8 +37,12 @@ class CustomAdapter(private val list: List<Recipe>, private val onClick: (Int) -
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val text = view.findViewById<TextView>(R.id.recipe_text)
         var img=view.findViewById<ImageView>(R.id.ItemListImg)
-//        val text2 = view.findViewById<TextView>(R.id.textView2)
+        //        val text2 = view.findViewById<TextView>(R.id.textView2)
         val itemLayout = view.findViewById<ConstraintLayout>(R.id.itemLayout)
+    }
+
+    override fun getItemCount(): Int {
+        TODO("Not yet implemented")
     }
 
 }

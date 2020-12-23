@@ -16,16 +16,16 @@ class Repository {
         onError: (String) -> Unit,
     ) {
         App.networkService.fetchRecipe(uuid).enqueue(
-            object : Callback<Recipe> {
-                override fun onResponse(call: Call<Recipe>, response: Response<Recipe>) {
-                    onResult.invoke(response.body()!!)
-                }
+                object : Callback<Recipe> {
+                    override fun onResponse(call: Call<Recipe>, response: Response<Recipe>) {
+                        onResult.invoke(response.body()!!)
+                    }
 
-                override fun onFailure(call: Call<Recipe>, t: Throwable) {
-                    onError.invoke(t.message!!)
-                }
+                    override fun onFailure(call: Call<Recipe>, t: Throwable) {
+                        onError.invoke(t.message!!)
+                    }
 
-            }
+                }
         )
     }
 
@@ -48,3 +48,5 @@ class Repository {
 
 
 }
+
+
